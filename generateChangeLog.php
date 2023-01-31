@@ -18,6 +18,9 @@ if (isset($_FILES['previousModpack']) && isset($_FILES['currentModpack'])) {
     $removed = '';
     $updated = '';
     $downgraded = '';
+    if ($currentManifest['minecraft']['version'] != $previousManifest['minecraft']['version']) {
+        $updated .= '- <span style="color:green">Updated to Minecraft ' . $currentManifest['minecraft']['version'] . '</span>' . PHP_EOL;
+    }
     foreach ($previousManifest['files'] as $previousMod) {
         $found = false;
         foreach ($currentManifest['files'] as $currentMod) {
