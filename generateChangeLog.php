@@ -19,8 +19,16 @@ if (isset($_FILES['previousModpack']) && isset($_FILES['currentModpack'])) {
     $updated = '';
     $downgraded = '';
     if ($currentManifest['minecraft']['version'] != $previousManifest['minecraft']['version']) {
-        $updated .= '- <span style="color:green">Updated to Minecraft ' . $currentManifest['minecraft']['version'] . '</span>' . PHP_EOL;
+        $updated .= '- <span style="color:green">Changed to Minecraft version: ' . $currentManifest['minecraft']['version'] . '</span>' . PHP_EOL;
     }
+    if (isset($currentManifest['minecraft']['modLoaders'][0]['id'])) {
+        $currentForgeVersion = explode('-', $currentManifest['minecraft']['modLoaders'][0]['id'])[1];
+        $previousForgeVersion = explode('-', $previousManifest['minecraft']['modLoaders'][0]['id'])[1];
+        if ($previousForgeVersion != $currentForgeVersion) {
+            $updated .= '- <span style="color:green">Changed to Forge version: ' . $currentForgeVersion . '</span>' . PHP_EOL;
+        }
+    }
+
     foreach ($previousManifest['files'] as $previousMod) {
         $found = false;
         foreach ($currentManifest['files'] as $currentMod) {
