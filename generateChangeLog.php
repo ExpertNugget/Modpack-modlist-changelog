@@ -19,13 +19,13 @@ if (isset($_FILES['previousModpack']) && isset($_FILES['currentModpack'])) {
     $updated = '';
     $downgraded = '';
     if ($currentManifest['minecraft']['version'] != $previousManifest['minecraft']['version']) {
-        $updated .= '- <span style="color:green">Changed to Minecraft version: ' . $currentManifest['minecraft']['version'] . '</span>' . PHP_EOL;
+        $changes .= '- <span style="color:green">Changed to Minecraft version: ' . $currentManifest['minecraft']['version'] . '</span>' . PHP_EOL;
     }
     if (isset($currentManifest['minecraft']['modLoaders'][0]['id'])) {
         $currentForgeVersion = explode('-', $currentManifest['minecraft']['modLoaders'][0]['id'])[1];
         $previousForgeVersion = explode('-', $previousManifest['minecraft']['modLoaders'][0]['id'])[1];
         if ($previousForgeVersion != $currentForgeVersion) {
-            $updated .= '- <span style="color:green">Changed to Forge version: ' . $currentForgeVersion . '</span>' . PHP_EOL;
+            $changes .= '- <span style="color:green">Changed to Forge version: ' . $currentForgeVersion . '</span>' . PHP_EOL;
         }
     }
 
@@ -64,6 +64,7 @@ if (isset($_FILES['previousModpack']) && isset($_FILES['currentModpack'])) {
           <div class="container">
               <h2>Change-Log</h2>
               <pre>' .
+              '## Changes' . PHP_EOL . $changes .
               ($added != '' ? '## Added' . PHP_EOL . $added : '') .
               ($updated != '' ? '## Updated' . PHP_EOL . $updated : '') .
               ($removed != '' ? '## Removed' . PHP_EOL . $removed : '') .
