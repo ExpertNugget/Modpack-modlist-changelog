@@ -52,7 +52,7 @@ if (isset($_FILES['previousModpack']) && isset($_FILES['currentModpack'])) {
     }
 
     // Display the change-log
-    echo '<a href="index.html" class="btn btn-default" role="button">Back</a>
+    echo '<a href="index.php" class="btn btn-default" role="button">Back</a>
           <div class="container">
               <h2>Change-Log</h2>
               <pre>' .
